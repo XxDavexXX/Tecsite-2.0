@@ -1,50 +1,50 @@
 import 'package:flutter/material.dart';
 
-class NavBar extends StatefulWidget {
-  @override
-  _NavBarState createState() => _NavBarState();
-}
+class NavBar extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onItemTapped;
 
-class _NavBarState extends State<NavBar> {
-  int _selectedIndex = 2; // Default to the middle icon (home)
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Aquí puedes manejar la navegación según el índice seleccionado
-    // Por ejemplo, usando un Navigator o cualquier otra lógica de navegación
-  }
+  NavBar({required this.selectedIndex, required this.onItemTapped});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.card_membership, color: Colors.blue),
-          label: 'Carnet',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today, color: Colors.blue),
-          label: 'Calendario',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home, color: Colors.blue),
-          label: 'Inicio',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.assignment, color: Colors.blue),
-          label: 'Asistencia',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings, color: Colors.blue),
-          label: 'Configuración',
-        ),
+      items: <BottomNavigationBarItem>[
+        _buildNavItem(Icons.card_membership, 'Carnet', 0),
+        _buildNavItem(Icons.calendar_today, 'Calendario', 1),
+        _buildNavItem(Icons.home, 'Inicio', 2),
+        _buildNavItem(Icons.assignment, 'Asistencia', 3),
+        _buildNavItem(Icons.settings, 'Configuración', 4),
       ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: Colors.blue,
-      onTap: _onItemTapped,
+      currentIndex: selectedIndex,
+      selectedItemColor: Color(0xFF20B2E3),
+      onTap: onItemTapped,
+    );
+  }
+
+  BottomNavigationBarItem _buildNavItem(IconData icon, String label, int index) {
+    return BottomNavigationBarItem(
+      icon: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: index == selectedIndex ? Color(0xFF20B2E3) : Colors.grey),
+          Text(
+            label,
+            style: TextStyle(
+              color: index == selectedIndex ? Color(0xFF20B2E3) : Colors.grey,
+            ),
+          ),
+          if (index == selectedIndex)
+            Container(
+              margin: EdgeInsets.only(top: 4),
+              height: 3,
+              width: 24,
+              color: Color(0xFF20B2E3),
+            ),
+        ],
+      ),
+      label: '', // Leave the label empty to avoid double text
     );
   }
 }

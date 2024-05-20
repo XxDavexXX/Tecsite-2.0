@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tecsite/components/navbar.dart'; // Ajusta la ruta según tu estructura de carpetas
 import 'package:tecsite/components/headlogo.dart';
 
-class HomeScreen extends StatelessWidget {
+class AsistenciaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,13 +11,13 @@ class HomeScreen extends StatelessWidget {
           HeadLogo(), // Utiliza el componente HeadLogo
           Expanded(
             child: Center(
-              child: Text('Contenido de la pantalla principal'),
+              child: Text('Contenido de la pantalla asistencia'),
             ),
           ),
         ],
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 2, // Índice de la vista actual (Home)
+        selectedIndex: 3, // Índice de la vista actual (Home)
         onItemTapped: (index) {
           // Navegar a la vista correspondiente según el índice
           switch (index) {
